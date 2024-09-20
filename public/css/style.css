@@ -1,0 +1,193 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}
+
+.container-home {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/images/bghome.jpg");
+    display: flex;
+    flex-direction: column;
+    height: 92.8vh;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+}
+
+
+/* navbar */
+.navbar-logo{
+font-weight: 700;
+
+}
+
+.navbar-home {
+    background-color: #C9D6DF;
+}
+
+
+/*  */
+.container-home h1 {
+    color: #ffffff;
+}
+
+.home-btn {
+    background-color: #52616B;
+    text-decoration: none;
+    padding: 10px 50px;
+    color: #ffffff;
+    border-radius: 10px;
+    font-weight: 500;
+
+}
+
+.container-home p {
+    width: 30vw;
+    color: white;
+    margin-bottom: 30px;
+}
+
+/* login */
+
+.container-login{
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login {
+    border-radius: 20px;
+    background-color: #1E2022;
+    width: 500px;
+    height: 500px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.login-awal {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+input{
+    width: 300px;
+    height: 35px;
+    border-radius: 10px;
+}
+
+button{
+    width: 100px;
+    height: 50px;
+    border-radius: 30px;
+    font-weight: 500;
+}
+
+
+/* dashboard */
+.kartu{
+    display: flex;
+    margin: 20px 20px;
+    gap: 20px;
+    
+}
+
+.subtitle-dashboard{
+    margin-left: 20px;
+}
+
+.title-dashboard{
+    margin-top: 10px;
+    margin-left: 20px;
+}
+
+
+
+/* income */
+
+.container-income{
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.income {
+    border-radius: 20px;
+    background-color: #C9D6DF;
+    width: 500px;
+    height: 500px;
+    color: rgb(8, 8, 8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+
+.income-awal {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+label{
+    font-weight: 400;
+}
+
+
+/* expense */
+
+
+.container-expense{
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.expense {
+    border-radius: 20px;
+    background-color: #52616B;
+    width: 500px;
+    height: 500px;
+    color: rgb(255, 255, 255);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+
+.expense-awal {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+label{
+    font-weight: 400;
+}
+
+.submit-expense{
+    border-radius: 30px;
+
+}
