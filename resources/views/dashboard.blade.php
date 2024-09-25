@@ -65,136 +65,142 @@
     <div class="title px-5 ">
         <h1 class="title-dashboard">Dashboard</h1>
         <p class="subtitle-dashboard">Anda bisa melihat pemasukan dan pengeluaran di dashboard ini!</p>
-    </div>
-    {{-- --------- card ----------- --}}
-    <div>
-
+        @if ($data['totalpengeluaran'] > 2000000)
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            Anda Telah Mencapai Batas Pengeluaran Perbulan!!
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        @endif
         @if (session()->has('success'))
             <div class="alert alert-success justify-content-center">{{ session('success') }}</div>
         @endif
-
-
-        {{-- ------ card ------ --}}
-            <div class="kartu px-5 row">
-                <div class="col">
-                    <div class="card bg-light text-dark mb-4">
-                        <div class="card-body">Saldo</div>
-                        <h4 class="text-dark px-3">IDR {{ $data['totalpemasukan'] - $data['totalpengeluaran'] }}</h4>
-                        <div class="card-footer d-flex align-items-center justify-content-between">
-                            {{-- <a class="small text-dark stretched-link" href="#">View Details</a> --}}
-                            <div class="small text-dark"><i class="fas fa-angle-right"></i></div>
-                        </div>
-                    </div>
-    
-                </div>
-    
-    
-                <div class="col">
-                    <div class="card bg-light text-dark mb-4">
-                        <div class="card-body">Pemasukan</div>
-                        <h4 class="text-dark px-3">IDR {{ $data['totalpemasukan'] }}</h4>
-                        <div class="card-footer d-flex align-items-center justify-content-between">
-                            {{-- <a class="small text-dark stretched-link" href="#">View Details</a> --}}
-                            <div class="small text-dark"><i class="fas fa-angle-right"></i></div>
-                        </div>
-                    </div>
-    
-                </div>
-    
-    
-    
-                <div class="col">
-                    <div class="card bg-light text-dark mb-4">
-                        <div class="card-body">Pengeluaran</div>
-                        <h4 class="text-dark px-3">IDR {{ $data['totalpengeluaran'] }}</h4>
-                        <div class="card-footer d-flex align-items-center justify-content-between">
-                            {{-- <a class="small text-dark stretched-link" href="#">View Details</a> --}}
-                            <div class="small text-dark"><i class="fas fa-angle-right"></i></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-    {{-- ------- end card ----------- --}}
-
-
-
-    {{-- -------- tabel ------- --}}
-
-    <div class=" px-5 row mx-4 gap-5">
-        <div class="card col">
-            <div class="card-header">
-                Riwayat Transaksi Pemasukan
-            </div>
-            <div class="card-body table-responsive">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">ID</th>
-                            <th scope="col">Nominal</th>
-                            <th scope="col">Tanggal</th>
-                            <th scope="col">Keterangan</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($data['pemasukan'] as $item)
-                            <tr>
-                                <th>{{ $loop->iteration }}</th>
-                                <td>{{ $item->jumlah_pemasukan }}</td>
-                                <td>{{ $item->tanggal }}</td>
-                                <td>{{ $item->keterangan }}</td>
-                                <td><a href="/income/update/{{ $item->id }}"><button> Update</button></a></td>
-                                <td>
-                                    <form action="income/delete/{{ $item->id }}" method="post">@csrf <button
-                                            type="submit">Delete</button></form>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <div class="card col">
-            <div class="card-header">
-                Riwayat Transaksi Pengeluaran
-            </div>
-            <div class="card-body table-responsive">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">ID</th>
-                            <th scope="col">Nominal</th>
-                            <th scope="col">Tanggal</th>
-                            <th scope="col">Keterangan</th>
-                        </tr>
-                    </thead>
-                    <tbody`>
-                        @foreach ($data['pengeluaran'] as $item)
-                            <tr>
-                                <td>{{ $loop->iteration }}</th>
-                                <td>{{ $item->jumlah_pengeluaran }}</td>
-                                <td>{{ $item->tanggal }}</td>
-                                <td>{{ $item->keterangan }}</td>
-                                <td><a href="expense/update/{{ $item->id }}"><button>Update</button></a></td>
-                                <td>
-                                    <form action="expense/delete/{{ $item->id }}" method="post">@csrf
-                                        <button type="submit">delete</button>
-                                    </form>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div>
     </div>
-    {{-- -------- end tabel ------- --}}
+    {{-- --------- card ----------- --}}
+    <div>
+        {{-- ------ card ------ --}}
+        <div class="kartu px-5 row">
+            <div class="col">
+                <div class="card bg-light text-dark mb-4">
+                    <div class="card-body">Saldo</div>
+                    <h4 class="text-dark px-3">{{ 'Rp. ' . number_format($data['totalpemasukan'] - $data['totalpengeluaran'], 0, ',', '.') }}
+                    </h4>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                        {{-- <a class="small text-dark stretched-link" href="#">View Details</a> --}}
+                        <div class="small text-dark"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="col">
+                <div class="card bg-light text-dark mb-4">
+                    <div class="card-body">Pemasukan</div>
+                    <h4 class="text-dark px-3">{{ 'Rp. ' . number_format($data['totalpemasukan'], 0, ',', '.') }}
+                    </h4>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                        {{-- <a class="small text-dark stretched-link" href="#">View Details</a> --}}
+                        <div class="small text-dark"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                </div>
+
+            </div>
 
 
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
-    </script>
+            <div class="col">
+                <div class="card bg-light text-dark mb-4">
+                    <div class="card-body">Pengeluaran</div>
+                    <h4 class="text-dark px-3">{{ 'Rp. ' . number_format($data['totalpengeluaran'], 0, ',', '.') }}
+                    </h4>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                        {{-- <a class="small text-dark stretched-link" href="#">View Details</a> --}}
+                        <div class="small text-dark"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{-- ------- end card ----------- --}}
+
+
+
+        {{-- -------- tabel ------- --}}
+
+        <div class=" px-5 row mx-4 gap-5">
+            <div class="card col">
+                <div class="card-header">
+                    Riwayat Transaksi Pemasukan
+                </div>
+                <div class="card-body table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Nominal</th>
+                                <th scope="col">Tanggal</th>
+                                <th scope="col">Keterangan</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($data['pemasukan'] as $item)
+                                <tr>
+                                    <th>{{ $loop->iteration }}</th>
+                                    <td>{{ $item->jumlah_pemasukan }}</td>
+                                    <td>{{ $item->tanggal }}</td>
+                                    <td>{{ $item->keterangan }}</td>
+                                    <td><a href="/income/update/{{ $item->id }}"><button> Update</button></a></td>
+                                    <td>
+                                        <form action="income/delete/{{ $item->id }}" method="post">@csrf <button
+                                                type="submit">Delete</button></form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card col">
+                <div class="card-header">
+                    Riwayat Transaksi Pengeluaran
+                </div>
+                <div class="card-body table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Nominal</th>
+                                <th scope="col">Tanggal</th>
+                                <th scope="col">Keterangan</th>
+                            </tr>
+                        </thead>
+                        <tbody`>
+                            @foreach ($data['pengeluaran'] as $item)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</th>
+                                    <td>{{ $item->jumlah_pengeluaran }}</td>
+                                    <td>{{ $item->tanggal }}</td>
+                                    <td>{{ $item->keterangan }}</td>
+                                    <td><a href="expense/update/{{ $item->id }}"><button>Update</button></a></td>
+                                    <td>
+                                        <form action="expense/delete/{{ $item->id }}" method="post">@csrf
+                                            <button type="submit">delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        {{-- -------- end tabel ------- --}}
+
+
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+        </script>
 </body>
 
 </html>
